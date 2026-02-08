@@ -37,12 +37,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-              <span className="text-[#1E3A8A] font-bold text-2xl">DM</span>
-            </div>
-            <span className={`text-xl font-bold ${scrolled ? 'text-[#1E3A8A]' : 'text-white'}`}>
-              DataMaster
-            </span>
+            <img src="/logo.png.jpeg" alt="DataMaster Logo" className="h-10 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
