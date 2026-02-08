@@ -37,7 +37,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img src="/logo.png.jpeg" alt="DataMaster Logo" className="h-10 w-auto object-contain" />
+            <img src="/logo.png.jpeg" alt="DataMaster Logo" className="h-10 w-auto object-contain rounded-full" />
           </Link>
 
           {/* Desktop Navigation */}
