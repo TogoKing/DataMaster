@@ -136,8 +136,8 @@ const Admin = () => {
         <aside className="fixed left-0 top-16 w-64 h-screen bg-white shadow-lg z-40 overflow-y-auto">
           <div className="p-6">
             <div className="flex items-center space-x-3 mb-8">
-              <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 bg-[#1E3A8A] rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">DM</span>
               </div>
               <div>
                 <p className="font-semibold text-gray-900">Admin</p>
