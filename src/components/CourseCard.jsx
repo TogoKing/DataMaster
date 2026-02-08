@@ -9,7 +9,7 @@ const CourseCard = ({ course }) => {
 
   const formatPrice = (price) => {
     if (price === 0) return 'Gratuit';
-    return `${price.toLocaleString()} CFA`;
+    return `${price.toLocaleString()}`;
   };
 
   const getSourceBadge = (source) => {

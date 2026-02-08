@@ -374,7 +374,7 @@ const Admin = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Prix (CFA)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Prix (USD)</label>
                   <input
                     type="number"
                     value={courseForm.price}
