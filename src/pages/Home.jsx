@@ -15,21 +15,26 @@ const Home = () => {
   const recentAnnouncements = announcements.slice(0, 3);
 
   const stats = [
-    { icon: BookOpen, value: '50+', label: 'Formations' },
+    { icon: BookOpen, value: courses.length > 0 ? courses.length + '+' : '0+', label: 'Formations' },
     { icon: Users, value: '1000+', label: 'Apprenants' },
     { icon: Award, value: '20+', label: 'Certificats Délivrés' },
     { icon: TrendingUp, value: '95%', label: 'Taux de Satisfaction' }
   ];
 
   const categories = [
-    { name: 'DataMaster', count: 4, color: 'bg-primary-600', icon: '📊' },
-    { name: 'Harvard', count: 2, color: 'bg-red-600', icon: '🎓' },
-    { name: 'Analytics Vidhya', count: 2, color: 'bg-orange-500', icon: '📈' },
-    { name: 'Musique', count: 3, color: 'bg-purple-600', icon: '🎵' },
-    { name: 'Design UI/UX', count: 1, color: 'bg-pink-600', icon: '🎨' },
-    { name: 'Montage Vidéo', count: 2, color: 'bg-teal-600', icon: '🎬' },
-    { name: 'Création de Contenu', count: 1, color: 'bg-indigo-600', icon: '📱' }
+    { name: 'DataMaster', count: 0, icon: '📊' },
+    { name: 'Harvard', count: 0, icon: '🎓' },
+    { name: 'Analytics Vidhya', count: 0, icon: '📈' },
+    { name: 'Musique', count: 0, icon: '🎵' },
+    { name: 'Design UI/UX', count: 0, icon: '🎨' },
+    { name: 'Montage Vidéo', count: 0, icon: '🎬' },
+    { name: 'Création de Contenu', count: 0, icon: '📱' }
   ];
+
+  // Count courses per category
+  categories.forEach(cat => {
+    cat.count = courses.filter(c => c.category === cat.name).length;
+  });
 
   return (
     <div className="min-h-screen">
@@ -118,40 +123,49 @@ const Home = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
             Nos Catégories de Formations
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-            {categories.map((category) => (
-              <Link
-                key={category.name}
-                to={`/courses?category=${category.name}`}
-                className="flex flex-col items-center p-4 rounded-xl hover:shadow-lg transition-all bg-gray-50 hover:bg-white border border-gray-100"
-              >
-                <span className="text-3xl mb-2">{category.icon}</span>
-                <span className="font-medium text-gray-900 text-center">{category.name}</span>
-                <span className="text-sm text-gray-500">{category.count} formations</span>
-              </Link>
-            ))}
-          </div>
+          {courses.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+              {categories.filter(c => c.count > 0).map((category) => (
+                <Link
+                  key={category.name}
+                  to={`/courses?category=${category.name}`}
+                  className="flex flex-col items-center p-4 rounded-xl hover:shadow-lg transition-all bg-gray-50 hover:bg-white border border-gray-100"
+                >
+                  <span className="text-3xl mb-2">{category.icon}</span>
+                  <span className="font-medium text-gray-900 text-center">{category.name}</span>
+                  <span className="text-sm text-gray-500">{category.count} formations</span>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-gray-500 text-lg mb-4">Aucune formation disponible pour le moment.</p>
+              <p className="text-gray-400">Revenez bientôt ou contactez-nous pour plus d'informations.</p>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Featured Courses */}
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-              Formations en Vedette
-            </h2>
-            <Link to="/courses" className="text-[#1E3A8A] hover:text-[#2563EB] font-medium">
-              Voir tout →
-            </Link>
+      {courses.length > 0 && (
+        <section className="py-12 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                Formations en Vedette
+              </h2>
+              <Link to="/courses" className="text-[#1E3A8A] hover:text-[#2563EB] font-medium">
+                Voir tout →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredCourses.map((course) => (
+                <CourseCard key={course.id} course={course} />
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredCourses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-[#1E3A8A] to-[#2563EB]">
