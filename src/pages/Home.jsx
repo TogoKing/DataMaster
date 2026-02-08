@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import CourseCard from '../components/CourseCard';
 import AnnouncementCard from '../components/AnnouncementCard';
 
+const BACKGROUND_IMAGE = 'https://i.pinimg.com/736x/46/1a/8d/461a8dbdedcdbaeeb71ffca70c606fa0.jpg';
+
 const Home = () => {
   const { courses, announcements } = useData();
   const { user } = useAuth();
@@ -30,16 +32,25 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-primary-900 via-primary-800 to-primary-700 pt-16">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+    <div className="min-h-screen">
+      {/* Hero Section with Background Image */}
+      <section className="relative pt-16 min-h-screen flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={BACKGROUND_IMAGE} 
+            alt="Background" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1E3A8A]/90 to-[#2563EB]/80"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
                 Formez-vous avec les{' '}
-                <span className="text-secondary-400">Meilleurs</span>
+                <span className="text-[#F59E0B]">Meilleurs</span>
               </h1>
               <p className="text-xl text-gray-200 mb-8">
                 Découvrez nos formations de qualité en Data Science, Design, Musique et bien plus. 
@@ -51,7 +62,7 @@ const Home = () => {
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 {!user && (
-                  <Link to="/register" className="btn-secondary flex items-center justify-center space-x-2 border-white text-white hover:bg-white/10">
+                  <Link to="/register" className="px-6 py-3 bg-[#F59E0B] text-white rounded-lg font-semibold hover:bg-[#D97706] transition-all duration-300 shadow-lg flex items-center justify-center space-x-2">
                     <Play className="w-5 h-5" />
                     <span>Commencer Gratuitement</span>
                   </Link>
@@ -62,10 +73,10 @@ const Home = () => {
             {/* Stats */}
             <div className="hidden lg:grid grid-cols-2 gap-4">
               {stats.map((stat, index) => (
-                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white">
-                  <stat.icon className="w-8 h-8 mb-2 text-secondary-400" />
+                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white border border-white/20">
+                  <stat.icon className="w-8 h-8 mb-2 text-[#F59E0B]" />
                   <div className="text-3xl font-bold">{stat.value}</div>
-                  <div className="text-gray-300">{stat.label}</div>
+                  <div className="text-gray-200">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -73,8 +84,8 @@ const Home = () => {
         </div>
         
         {/* Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
             <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f9fafb"/>
           </svg>
         </div>
@@ -88,7 +99,7 @@ const Home = () => {
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                 Dernières Annonces
               </h2>
-              <Link to="/contact" className="text-primary-600 hover:text-primary-700 font-medium">
+              <Link to="/contact" className="text-[#1E3A8A] hover:text-[#2563EB] font-medium">
                 Voir tout →
               </Link>
             </div>
@@ -112,7 +123,7 @@ const Home = () => {
               <Link
                 key={category.name}
                 to={`/courses?category=${category.name}`}
-                className="flex flex-col items-center p-4 rounded-xl hover:shadow-lg transition-all bg-gray-50 hover:bg-white"
+                className="flex flex-col items-center p-4 rounded-xl hover:shadow-lg transition-all bg-gray-50 hover:bg-white border border-gray-100"
               >
                 <span className="text-3xl mb-2">{category.icon}</span>
                 <span className="font-medium text-gray-900 text-center">{category.name}</span>
@@ -130,7 +141,7 @@ const Home = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
               Formations en Vedette
             </h2>
-            <Link to="/courses" className="text-primary-600 hover:text-primary-700 font-medium">
+            <Link to="/courses" className="text-[#1E3A8A] hover:text-[#2563EB] font-medium">
               Voir tout →
             </Link>
           </div>
@@ -143,7 +154,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-primary-600 to-primary-700">
+      <section className="py-16 bg-gradient-to-r from-[#1E3A8A] to-[#2563EB]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Prêt à Commencer Votre Voyage ?
@@ -152,7 +163,7 @@ const Home = () => {
             Rejoignez des milliers d'apprenants et développez vos compétences avec nos formations de qualité.
           </p>
           {!user && (
-            <Link to="/register" className="inline-flex items-center space-x-2 bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg">
+            <Link to="/register" className="inline-flex items-center space-x-2 bg-[#F59E0B] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#D97706] transition-all shadow-lg">
               <span>Créer un Compte Gratuit</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
